@@ -21,7 +21,7 @@ export class RecipeService {
     new Recipe(
       'A Test Recipe',
       'This is simply a Test Recipe',
-      'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_960_720.jpg',
+      'https://cdn.pixabay.com/photo/2019/01/29/18/05/burger-3962996_960_720.jpg',
       [
         new Ingredient('Buns', 2),
       new Ingredient('Meat', 1)
