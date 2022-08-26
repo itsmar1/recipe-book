@@ -19,7 +19,7 @@ export interface AuthResponseData {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  user = new BehaviorSubject<User>(null);
+  // user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router, private store: Store<fromApp.AppState>) {
@@ -62,7 +62,7 @@ export class AuthService {
       new Date(userData._tokenExpirationDate));
 
     if (loadedUser.token) {
-      this.user.next(loadedUser);
+      // this.user.next(loadedUser);
       this.store.dispatch(new AuthActions.Login({
         email: loadedUser.email,
         userId: loadedUser.id,
