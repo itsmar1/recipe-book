@@ -9,9 +9,6 @@ export interface State {
   editedIngredientIndex: number;
 }
 
-export interface AppState {
-  shoppingList: State;
-}
 
 const initialState: State = {
   ingredients: [
@@ -41,7 +38,7 @@ export function shoppingListReducer(state: State = initialState, action: Shoppin
         ...action.payload
       };
       const updatedIngredients = [...state.ingredients];
-      updatedIngredient[state.editedIngredientIndex] = updatedIngredient;
+      updatedIngredients[state.editedIngredientIndex] = updatedIngredient;
 
       return {
         ...state,
