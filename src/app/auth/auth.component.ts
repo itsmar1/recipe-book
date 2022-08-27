@@ -5,6 +5,9 @@ import {Observable, Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {AlertComponent} from "../shared/alert/alert.component";
 import {PlaceholderDirective} from "../shared/placeholder/placeholder.directive";
+import {Store} from "@ngrx/store";
+import * as fromApp from '../store/app.reducer';
+import * as AuthActions from './store/auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -22,7 +25,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private componentFactoryResolver: ComponentFactoryResolver) { }
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
   }
@@ -36,15 +40,16 @@ export class AuthComponent implements OnInit, OnDestroy {
       return
     }
     const email = form.value.email;
-    const passowrd = form.value.password;
+    const password = form.value.password;
 
     let authObs: Observable<AuthResponseData>
 
     this.isLoading = true;
     if (this.isLoginMode) {
-      authObs = this.authService.login(email, passowrd);
+      // authObs = this.authService.login(email, passowrd);
+      this.store.dispatch(new AuthActions.LoginStart({email, password}));
     } else {
-      authObs = this.authService.signup(email, passowrd);
+      authObs = this.authService.signup(email, password);
     }
 
     authObs.subscribe(resData => {
